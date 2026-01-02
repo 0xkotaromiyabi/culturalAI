@@ -39,7 +39,7 @@ Aplikasi berbasis AI untuk simulasi terjemahan dan deteksi pola kesalahan, diban
 1. Clone or navigate to the repository:
 
 ```bash
-cd docmakers
+cd culturalAI
 ```
 
 2. Install dependencies:
@@ -95,7 +95,7 @@ Translation (Indonesian): 'Selamat pagi, bagaimana kamu?'"
 ## Project Structure
 
 ```
-docmakers/
+culturalAI/
 ├── app/
 │   ├── api/
 │   │   └── chat/
@@ -145,7 +145,7 @@ Analyzes cultural appropriateness and provides guidance on cultural sensitivity.
 
 Deploy to Vercel with one click:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/docmakers)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/culturalAI)
 
 Don't forget to configure your environment variables:
 - `GOOGLE_GENERATIVE_AI_API_KEY`: Your Google Gemini API key
@@ -172,3 +172,4 @@ MIT
 ## Authors
 
 Built with ❤️ using Google Gemini, Next.js, and Vercel AI SDK
+
