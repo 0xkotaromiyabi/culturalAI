@@ -25,8 +25,9 @@ const FEW_SHOT_EXAMPLES = `
 - **Teaching Note:** Focus on *when* and *to whom* a question is socially appropriate.
 `;
 
-// Feature flag for JSON mode
-const USE_JSON_MODE = process.env.ENABLE_JSON_OUTPUT !== 'false'; // Default to true
+// Feature flag for JSON mode - DISABLED due to stream compatibility issues
+// Set to 'true' to re-enable when fixed
+const USE_JSON_MODE = process.env.ENABLE_JSON_OUTPUT === 'true'; // Default to false
 
 export async function POST(req: Request) {
     try {
