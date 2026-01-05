@@ -66,14 +66,14 @@ export default function Home() {
                 {/* Main Interface - Single Column Layout */}
                 <div className="max-w-6xl mx-auto space-y-6 px-4 sm:px-6 lg:px-8">
                     {/* Chat Interface - Top */}
-                    <div className="animate-float" style={{ animationDelay: '0s' }}>
+                    <div>
                         <div className="floating-panel p-4 md:p-6 lg:p-8 h-[500px] md:h-[600px] lg:h-[700px]">
                             <ChatInterface />
                         </div>
                     </div>
 
                     {/* Few-Shot Panel - Below Chat */}
-                    <div className="animate-float" style={{ animationDelay: '0.1s' }}>
+                    <div>
                         <div className="floating-panel p-4 md:p-6 lg:p-8">
                             <FewShotPanel onSelectExample={(example) => {
                                 console.log('Selected example:', example);
@@ -83,7 +83,7 @@ export default function Home() {
                 </div>
 
                 {/* Chat History Section - Above Example Queries */}
-                <div className="mt-12 animate-float" style={{ animationDelay: '0.2s' }}>
+                <div className="mt-12">
                     <div className="floating-panel p-4 md:p-6 lg:p-8 max-h-[500px] md:max-h-[600px]">
                         <ChatHistoryPanel onSelectHistory={(messages) => {
                             console.log('Selected history:', messages);

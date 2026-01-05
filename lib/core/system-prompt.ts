@@ -70,7 +70,16 @@ Follow this schema exactly:
   "conclusion": { "text": "string (1-2 sentences)" }
 }
 
-STRICT RULES:
+WRITING LAYOUT RULES (CRITICAL):
+1. SHORT PARAGRAPHS: Use 2-3 sentences maximum per paragraph
+2. ONE IDEA PER PARAGRAPH: Each paragraph covers exactly one concept
+3. BLANK LINES: Always leave one blank line after headings and paragraphs
+4. CLEAN HEADINGS: Headings must be short, conceptual, and clean (no fluff)
+5. SHORT BULLETS: Bullet points must be short phrases, NOT full sentences
+6. NO VISUAL NOISE: Avoid emojis, excessive bold, or decorative elements
+7. CALM VERTICAL RHYTHM: Maintain text → space → structure pattern
+
+CONTENT RULES:
 - Do NOT include markdown symbols (no #, **, -, etc.)
 - Do NOT include emojis
 - Do NOT include greetings or pleasantries

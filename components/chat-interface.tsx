@@ -47,7 +47,7 @@ export function ChatInterface() {
 
             {/* Messages Area - Scrollable with Claude.ai spacing */}
             <div className="flex-1 overflow-y-auto px-4 md:px-6 lg:px-8 py-4 md:py-6">
-                <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
+                <div className="max-w-5xl mx-auto space-y-6 md:space-y-8">
                     {messages.length === 0 && (
                         <div className="text-center py-12 md:py-20">
                             <div className="inline-flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500/10 to-purple-600/10 mb-4 md:mb-6">
@@ -135,7 +135,7 @@ export function ChatInterface() {
 
             {/* Input Area - Claude.ai style sticky footer */}
             <div className="flex-none border-t border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="max-w-3xl mx-auto px-4 md:px-6 lg:px-8 py-4 md:py-5">
+                <div className="max-w-5xl mx-auto px-4 md:px-6 lg:px-8 py-4 md:py-5">
                     <form onSubmit={handleSubmit} className="relative">
                         <div className="relative flex items-center gap-2 md:gap-3">
                             <Input
