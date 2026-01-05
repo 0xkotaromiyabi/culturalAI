@@ -154,7 +154,7 @@ export default function Home() {
             <footer className="border-t border-border/30 mt-20 py-8">
                 <div className="container mx-auto px-6">
                     <p className="text-center text-xs text-muted-foreground font-light tracking-wide">
-                        Next.js, Vercel AI SDK, dan Google Gemini
+                        cultural nodes AI || AI-Powered Cultural Linguistics
                     </p>
                 </div>
             </footer>

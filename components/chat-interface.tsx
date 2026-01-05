@@ -41,9 +41,6 @@ export function ChatInterface() {
                         <h1 className="text-sm md:text-base font-semibold text-foreground">
                             Cultural-Linguistic Reasoning
                         </h1>
-                        <p className="text-xs text-muted-foreground hidden sm:block">
-                            Powered by Gemini 2.0 Flash
-                        </p>
                     </div>
                 </div>
             </div>
