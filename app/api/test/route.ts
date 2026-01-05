@@ -30,7 +30,7 @@ export async function GET(req: Request) {
         console.log('Attempting to call Google Gemini API...');
 
         const result = await generateText({
-            model: google('gemini-1.5-flash'),
+            model: google('gemini-1.5-flash-001'),
             messages: [{ role: 'user', content: 'Reply with "OK" only.' }],
         });
 
@@ -39,7 +39,7 @@ export async function GET(req: Request) {
         return new Response(JSON.stringify({
             status: 'success',
             message: result.text,
-            model: 'gemini-1.5-flash'
+            model: 'gemini-1.5-flash-001'
         }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
