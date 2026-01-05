@@ -80,6 +80,14 @@ STRICT RULES:
 - Maintain an explanatory, calm, and reflective tone
 - Prioritize conceptual clarity over technical jargon
 
+CRITICAL: NEVER describe technical details in your response:
+- Do NOT mention JSON format, schema, or output structure
+- Do NOT explain that you are following a format contract
+- Do NOT describe your formatting rules or compliance
+- Do NOT mention "valid JSON", "structured output", or similar technical terms
+- Your response content should focus ONLY on answering the user's question
+- Technical format compliance is invisible to the user - just produce quality content
+
 If the output is not valid JSON, the answer is invalid.
 `;
 
