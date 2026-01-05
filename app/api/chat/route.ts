@@ -63,7 +63,7 @@ Remember: Output ONLY valid JSON following the schema. No markdown, no emojis.`;
 
                 // Generate structured JSON response
                 const result = await generateText({
-                    model: google('gemini-1.5-flash'),
+                    model: google('gemini-2.0-flash'),
                     messages: convertToCoreMessages(messages),
                     system: systemPrompt,
                 });
@@ -144,7 +144,7 @@ ${FEW_SHOT_EXAMPLES}
 Be conversational, educational, and supportive. Respond in Indonesian if user writes in Indonesian, otherwise use English.`;
 
         const result = streamText({
-            model: google('gemini-1.5-flash'),
+            model: google('gemini-2.0-flash'),
             messages: convertToCoreMessages(messages),
             system: systemPrompt,
             async onFinish({ text, finishReason }) {

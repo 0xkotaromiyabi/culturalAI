@@ -8,4 +8,4 @@ if (!apiKey) {
 }
 
 // Create provider with configuration from environment
-export const model = google('gemini-1.5-flash');
+export const model = google('gemini-2.0-flash');

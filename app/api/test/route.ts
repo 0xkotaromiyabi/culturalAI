@@ -1,3 +1,4 @@
+import { generateText } from 'ai';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 
 export const maxDuration = 30;
@@ -5,11 +6,10 @@ export const maxDuration = 30;
 export async function GET(req: Request) {
     try {
         const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
-        const hasKey = !!apiKey && apiKey.length > 0;
 
-        console.log('=== TEST ENDPOINT DEBUG: LIST MODELS ===');
+        console.log('=== TEST ENDPOINT DEBUG: VERIFY MODEL ===');
 
-        if (!hasKey) {
+        if (!apiKey) {
             return new Response(JSON.stringify({
                 error: 'API key missing',
             }), {
@@ -18,31 +18,22 @@ export async function GET(req: Request) {
             });
         }
 
-        console.log('Fetching model list from Google API...');
+        const google = createGoogleGenerativeAI({ apiKey });
+        const modelName = 'gemini-2.0-flash'; // Confirmed from list
 
-        // Direct fetch to list models
-        const listResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        console.log(`Attempting to call Google Gemini API with model: ${modelName}...`);
 
-        if (!listResponse.ok) {
-            const errorText = await listResponse.text();
-            throw new Error(`Failed to list models: ${listResponse.status} ${listResponse.statusText} - ${errorText}`);
-        }
+        const result = await generateText({
+            model: google(modelName),
+            messages: [{ role: 'user', content: 'Reply with "OK" only.' }],
+        });
 
-        const data = await listResponse.json();
-        const models = data.models || [];
-
-        // Filter for generateContent support
-        const supportedModels = models.filter((m: any) =>
-            m.supportedGenerationMethods?.includes('generateContent')
-        ).map((m: any) => m.name);
-
-        console.log('Available Models:', supportedModels);
+        console.log('API Call Success:', result.text);
 
         return new Response(JSON.stringify({
             status: 'success',
-            message: 'Model list retrieved',
-            availableModels: supportedModels,
-            rawCount: models.length
+            message: result.text,
+            model: modelName
         }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
@@ -53,10 +44,11 @@ export async function GET(req: Request) {
         console.error(error);
 
         return new Response(JSON.stringify({
-            error: 'Failed to list models',
+            error: 'API Connection Failed',
             details: {
                 message: error.message,
-                name: error.name
+                name: error.name,
+                response: error.response
             }
         }), {
             status: 500,
