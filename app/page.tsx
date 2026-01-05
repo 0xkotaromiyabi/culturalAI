@@ -64,17 +64,17 @@ export default function Home() {
                 </div>
 
                 {/* Main Interface - Single Column Layout */}
-                <div className="max-w-4xl mx-auto space-y-6">
+                <div className="max-w-6xl mx-auto space-y-6 px-4 sm:px-6 lg:px-8">
                     {/* Chat Interface - Top */}
                     <div className="animate-float" style={{ animationDelay: '0s' }}>
-                        <div className="floating-panel p-4 md:p-6 h-[500px] md:h-[600px]">
+                        <div className="floating-panel p-4 md:p-6 lg:p-8 h-[500px] md:h-[600px] lg:h-[700px]">
                             <ChatInterface />
                         </div>
                     </div>
 
                     {/* Few-Shot Panel - Below Chat */}
                     <div className="animate-float" style={{ animationDelay: '0.1s' }}>
-                        <div className="floating-panel p-4 md:p-6">
+                        <div className="floating-panel p-4 md:p-6 lg:p-8">
                             <FewShotPanel onSelectExample={(example) => {
                                 console.log('Selected example:', example);
                             }} />
@@ -84,7 +84,7 @@ export default function Home() {
 
                 {/* Chat History Section - Above Example Queries */}
                 <div className="mt-12 animate-float" style={{ animationDelay: '0.2s' }}>
-                    <div className="floating-panel p-4 md:p-6 max-h-[500px]">
+                    <div className="floating-panel p-4 md:p-6 lg:p-8 max-h-[500px] md:max-h-[600px]">
                         <ChatHistoryPanel onSelectHistory={(messages) => {
                             console.log('Selected history:', messages);
                         }} />
@@ -92,7 +92,7 @@ export default function Home() {
                 </div>
 
                 {/* Usage Hints - Responsive */}
-                <div className="mt-12 md:mt-16 max-w-4xl mx-auto">
+                <div className="mt-12 md:mt-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="floating-panel p-6 md:p-8">
                         <h2 className="text-sm md:text-base font-semibold mb-4 md:mb-6 text-foreground/80 tracking-tight">
                             Example Queries
