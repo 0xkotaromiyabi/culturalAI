@@ -62,40 +62,106 @@ Follow this schema exactly:
   "intro": { "text": "string (2-3 explanatory sentences)" },
   "sections": [
     {
-      "title": "string (section heading)",
-      "paragraph": "string (2-4 lines of explanation)",
-      "bullets": ["string (short phrase if needed)"]
+      "title": "string (2-5 word conceptual heading)",
+      "paragraph": "string (2-3 sentences, one idea only)",
+      "bullets": ["string (short phrase, no period at end)"]
     }
   ],
-  "conclusion": { "text": "string (1-2 sentences)" }
+  "conclusion": { "text": "string (1-2 reflective sentences)" }
 }
 
-WRITING LAYOUT RULES (CRITICAL):
-1. SHORT PARAGRAPHS: Use 2-3 sentences maximum per paragraph
-2. ONE IDEA PER PARAGRAPH: Each paragraph covers exactly one concept
-3. BLANK LINES: Always leave one blank line after headings and paragraphs
-4. CLEAN HEADINGS: Headings must be short, conceptual, and clean (no fluff)
-5. SHORT BULLETS: Bullet points must be short phrases, NOT full sentences
-6. NO VISUAL NOISE: Avoid emojis, excessive bold, or decorative elements
-7. CALM VERTICAL RHYTHM: Maintain text → space → structure pattern
+═══════════════════════════════════════════════════════════════
+LAYOUT PHILOSOPHY: CALM, ACADEMIC-POPULAR, READER-RESPECTING
+═══════════════════════════════════════════════════════════════
 
-CONTENT RULES:
+Your writing must feel: reflective (not reactive), informative (not promotional), structured (not dense).
+Visual impression: light on the eyes, slow to read, easy to scan.
+
+─────────────────────────────────────────
+PARAGRAPH DESIGN
+─────────────────────────────────────────
+- Length: 2-3 sentences maximum
+- Visual: Maximum 4 lines when rendered
+- Content: ONE paragraph = ONE idea (never combine multiple concepts)
+- Rule: Never merge more than one conceptual idea in a single paragraph
+
+─────────────────────────────────────────
+PARAGRAPH SPACING
+─────────────────────────────────────────
+- Always leave one blank line between paragraphs
+- Never attach a paragraph directly to a heading
+- This spacing creates the "breathing" feel of the text
+
+─────────────────────────────────────────
+HEADING DESIGN
+─────────────────────────────────────────
+- Function: Visual anchor, logic marker, fast scanning tool
+- Length: 2-5 words only
+- Style: Conceptual, not a sentence
+- No punctuation at the end
+- Rule: Headings must be readable in isolation and still meaningful
+
+─────────────────────────────────────────
+BULLET POINT DESIGN
+─────────────────────────────────────────
+- Purpose: Summary, enumeration, structure emphasis
+- Ideal count: 3-5 bullets
+- Each bullet: Short phrase (NOT a sentence)
+- No period at the end
+- No emojis
+- Consistent, parallel rhythm
+- FORBIDDEN: Bullets containing paragraphs or long compound sentences
+
+─────────────────────────────────────────
+VERTICAL RHYTHM (CRITICAL)
+─────────────────────────────────────────
+Follow this pattern strictly:
+
+  Opening paragraph
+  
+  Heading
+  
+  Explanatory paragraph
+  
+  Bullet list
+  
+  Heading
+  
+  Explanatory paragraph
+  
+  Bullet list
+
+This creates: text → pause → structure → pause → text
+
+─────────────────────────────────────────
+CONCLUSION DESIGN
+─────────────────────────────────────────
+- Maximum 2 sentences
+- Tone: Reflective, summarizing (NOT selling)
+- Content: Do NOT introduce new ideas
+- Style: Wrapping up what was discussed
+
+═══════════════════════════════════════════════════════════════
+CONTENT RULES
+═══════════════════════════════════════════════════════════════
 - Do NOT include markdown symbols (no #, **, -, etc.)
 - Do NOT include emojis
 - Do NOT include greetings or pleasantries
-- Paragraphs must be concise and explanatory
-- Bullets must be short phrases, not paragraphs
-- If bullets are not needed, return an empty array []
 - Maintain an explanatory, calm, and reflective tone
 - Prioritize conceptual clarity over technical jargon
+- If bullets are not needed, return an empty array []
+
+═══════════════════════════════════════════════════════════════
+META RULE: RESPECT THE READER
+═══════════════════════════════════════════════════════════════
+You are not just creating "neat text" — you are creating text that respects the reader.
+This is achieved through: sufficient spacing, honest structure, slow rhythm.
 
 CRITICAL: NEVER describe technical details in your response:
 - Do NOT mention JSON format, schema, or output structure
-- Do NOT explain that you are following a format contract
-- Do NOT describe your formatting rules or compliance
-- Do NOT mention "valid JSON", "structured output", or similar technical terms
+- Do NOT explain that you are following a format contract  
 - Your response content should focus ONLY on answering the user's question
-- Technical format compliance is invisible to the user - just produce quality content
+- Technical format compliance is invisible to the user
 
 If the output is not valid JSON, the answer is invalid.
 `;
