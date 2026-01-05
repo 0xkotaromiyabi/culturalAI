@@ -62,7 +62,7 @@ Remember: Output ONLY valid JSON following the schema. No markdown, no emojis.`;
 
                 // Generate structured JSON response
                 const result = await generateText({
-                    model: google('models/gemini-2.5-flash'),
+                    model: google('models/gemini-2.0-flash'),
                     messages: convertToCoreMessages(messages),
                     system: systemPrompt,
                 });
@@ -77,14 +77,22 @@ Remember: Output ONLY valid JSON following the schema. No markdown, no emojis.`;
 
                 console.log('✅ JSON parsed and rendered successfully');
 
-                // Return as streaming-compatible response
-                // Simulate streaming by wrapping in data stream format
+                // Use simpler response approach - just return the text directly
                 const encoder = new TextEncoder();
                 const stream = new ReadableStream({
                     start(controller) {
-                        // Send the formatted content as a text delta
-                        const data = `0:${JSON.stringify(formattedMarkdown)}\n`;
-                        controller.enqueue(encoder.encode(data));
+                        // Use proper AI SDK data stream format
+                        // Format: 0:"text chunk"\n
+                        const chunks = formattedMarkdown.split('\n');
+                        chunks.forEach((chunk, i) => {
+                            const text = i < chunks.length - 1 ? chunk + '\n' : chunk;
+                            if (text) {
+                                const data = `0:${JSON.stringify(text)}\n`;
+                                controller.enqueue(encoder.encode(data));
+                            }
+                        });
+                        // Send finish message  
+                        controller.enqueue(encoder.encode('d:{"finishReason":"stop"}\n'));
                         controller.close();
                     }
                 });
@@ -92,7 +100,7 @@ Remember: Output ONLY valid JSON following the schema. No markdown, no emojis.`;
                 return new Response(stream, {
                     headers: {
                         'Content-Type': 'text/plain; charset=utf-8',
-                        'X-Response-Type': 'article-json',
+                        'X-Vercel-AI-Data-Stream': 'v1',
                     },
                 });
 
@@ -135,7 +143,7 @@ ${FEW_SHOT_EXAMPLES}
 Be conversational, educational, and supportive. Respond in Indonesian if user writes in Indonesian, otherwise use English.`;
 
         const result = streamText({
-            model: google('models/gemini-2.5-flash'),
+            model: google('models/gemini-2.0-flash'),
             messages: convertToCoreMessages(messages),
             system: systemPrompt,
             async onFinish({ text, finishReason }) {
