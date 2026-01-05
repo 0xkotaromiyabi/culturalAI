@@ -9,39 +9,48 @@ import type { ArticleOutput } from './schema';
 
 /**
  * Render ArticleOutput to formatted markdown
+ * 
+ * 100% DETERMINISTIC - ChatGPT-quality layout
+ * Clean, consistent, easy to render to HTML/PDF/Mobile
  */
 export function renderMarkdown(data: ArticleOutput): string {
     let md = "";
 
-    // Intro paragraph
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // INTRO - No heading, just explanatory text
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     if (data.intro?.text) {
         md += `${data.intro.text}\n\n`;
     }
 
-    // Sections
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // SECTIONS - Heading + Paragraph + Optional Bullets
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     if (data.sections && Array.isArray(data.sections)) {
-        data.sections.forEach(section => {
-            // Section heading
+        data.sections.forEach((section, index) => {
+            // Section heading (H2)
             if (section.title) {
                 md += `## ${section.title}\n\n`;
             }
 
-            // Section paragraph
+            // Section paragraph (explanatory text)
             if (section.paragraph) {
                 md += `${section.paragraph}\n\n`;
             }
 
-            // Bullets (only if needed)
+            // Bullets (only if array has items)
             if (section.bullets && section.bullets.length > 0) {
                 section.bullets.forEach(item => {
                     md += `- ${item}\n`;
                 });
-                md += `\n`;
+                md += `\n`; // Extra newline after bullets
             }
         });
     }
 
-    // Conclusion
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // CONCLUSION - Always labeled as "Kesimpulan"
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     if (data.conclusion?.text) {
         md += `## Kesimpulan\n\n`;
         md += `${data.conclusion.text}\n`;
