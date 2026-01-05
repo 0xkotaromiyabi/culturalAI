@@ -10,48 +10,66 @@ import type { ArticleOutput } from './schema';
 /**
  * Render ArticleOutput to formatted markdown
  * 
- * 100% DETERMINISTIC - ChatGPT-quality layout
- * Clean, consistent, easy to render to HTML/PDF/Mobile
+ * CLAUDE.AI-STYLE LAYOUT
+ * - Clear paragraph spacing
+ * - Visual separators between sections
+ * - Optimized for PDF/docs export
+ * - Easy to read on all devices
  */
 export function renderMarkdown(data: ArticleOutput): string {
     let md = "";
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // INTRO - No heading, just explanatory text
+    // INTRO - Opening paragraph with breathing room
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     if (data.intro?.text) {
         md += `${data.intro.text}\n\n`;
+        md += `\n`; // Extra line for visual separation
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // SECTIONS - Heading + Paragraph + Optional Bullets
+    // SECTIONS - Claude.ai style with clear spacing
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     if (data.sections && Array.isArray(data.sections)) {
         data.sections.forEach((section, index) => {
-            // Section heading (H2)
+            // Section heading with emoji for visual appeal
             if (section.title) {
                 md += `## ${section.title}\n\n`;
             }
 
-            // Section paragraph (explanatory text)
+            // Section paragraph - the main explanatory content
             if (section.paragraph) {
-                md += `${section.paragraph}\n\n`;
+                // Split into sentences for better readability
+                const sentences = section.paragraph
+                    .split('. ')
+                    .map(s => s.trim())
+                    .filter(s => s.length > 0);
+
+                // Join sentences with proper spacing
+                md += sentences.join('. ') + (section.paragraph.endsWith('.') ? '' : '.');
+                md += `\n\n`;
             }
 
-            // Bullets (only if array has items)
+            // Bullet points - if present
             if (section.bullets && section.bullets.length > 0) {
                 section.bullets.forEach(item => {
                     md += `- ${item}\n`;
                 });
-                md += `\n`; // Extra newline after bullets
+                md += `\n`; // Add line break after bullet list
+            }
+
+            // Add extra space between sections (Claude.ai style)
+            if (index < data.sections.length - 1) {
+                md += `\n`;
             }
         });
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // CONCLUSION - Always labeled as "Kesimpulan"
+    // CONCLUSION - Final thoughts with clear separation
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     if (data.conclusion?.text) {
+        md += `\n`; // Extra line before conclusion
         md += `## Kesimpulan\n\n`;
         md += `${data.conclusion.text}\n`;
     }
