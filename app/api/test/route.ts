@@ -1,4 +1,3 @@
-import { generateText } from 'ai';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 
 export const maxDuration = 30;
@@ -8,38 +7,42 @@ export async function GET(req: Request) {
         const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
         const hasKey = !!apiKey && apiKey.length > 0;
 
-        console.log('=== TEST ENDPOINT DEBUG ===');
-        console.log('API Key present:', hasKey);
+        console.log('=== TEST ENDPOINT DEBUG: LIST MODELS ===');
 
         if (!hasKey) {
             return new Response(JSON.stringify({
                 error: 'API key missing',
-                envDebug: {
-                    hasGoogleKey: hasKey,
-                    nodeEnv: process.env.NODE_ENV
-                }
             }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' },
             });
         }
 
-        const google = createGoogleGenerativeAI({ apiKey });
+        console.log('Fetching model list from Google API...');
 
-        // Use generateText instead of streamText to catch initial connection errors
-        console.log('Attempting to call Google Gemini API...');
+        // Direct fetch to list models
+        const listResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
 
-        const result = await generateText({
-            model: google('gemini-1.5-flash-001'),
-            messages: [{ role: 'user', content: 'Reply with "OK" only.' }],
-        });
+        if (!listResponse.ok) {
+            const errorText = await listResponse.text();
+            throw new Error(`Failed to list models: ${listResponse.status} ${listResponse.statusText} - ${errorText}`);
+        }
 
-        console.log('API Call Success:', result.text);
+        const data = await listResponse.json();
+        const models = data.models || [];
+
+        // Filter for generateContent support
+        const supportedModels = models.filter((m: any) =>
+            m.supportedGenerationMethods?.includes('generateContent')
+        ).map((m: any) => m.name);
+
+        console.log('Available Models:', supportedModels);
 
         return new Response(JSON.stringify({
             status: 'success',
-            message: result.text,
-            model: 'gemini-1.5-flash-001'
+            message: 'Model list retrieved',
+            availableModels: supportedModels,
+            rawCount: models.length
         }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
@@ -49,21 +52,12 @@ export async function GET(req: Request) {
         console.error('=== TEST ENDPOINT ERROR ===');
         console.error(error);
 
-        // Extract as much detail as possible
-        const errorDetails = {
-            message: error.message,
-            name: error.name,
-            cause: error.cause,
-            stack: error.stack,
-            // Google specific error fields often buried in response
-            response: error.response,
-            status: error.status,
-            headers: error.headers
-        };
-
         return new Response(JSON.stringify({
-            error: 'API Connection Failed',
-            details: errorDetails
+            error: 'Failed to list models',
+            details: {
+                message: error.message,
+                name: error.name
+            }
         }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' },
