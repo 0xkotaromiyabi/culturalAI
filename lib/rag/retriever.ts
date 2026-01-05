@@ -53,7 +53,7 @@ export async function retrieveDocuments(
 
         if (relevanceScore > 0) {
             results.push({
-                id: example.id,
+                id: example.id.toString(),
                 text: `${example.input}\n\n${example.output}`,
                 cultures: extractCultures(example.output),
                 domain: [example.category],

@@ -7,7 +7,5 @@ if (!apiKey) {
     throw new Error('GOOGLE_GENERATIVE_AI_API_KEY is not set');
 }
 
-// Create provider with explicit configuration
-export const model = google('gemini-1.5-flash', {
-    apiKey: apiKey,
-});
+// Create provider with configuration from environment
+export const model = google('gemini-1.5-flash');
