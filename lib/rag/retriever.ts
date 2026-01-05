@@ -10,9 +10,9 @@
  * 4. Treats documents as interpretive frameworks, not facts
  */
 
-import { HUMANITIES_KNOWLEDGE_BASE, type HumanitiesDocument } from './knowledge-base';
+import { HUMANITIES_KNOWLEDGE_BASE } from './knowledge-base';
 import { type HumanitiesIntent, type CulturalIntent } from './query-builder';
-import type { Discipline } from './document-schema';
+import type { Discipline, HumanitiesDocument } from './document-schema';
 
 // ============================================
 // RETRIEVAL OPTIONS
