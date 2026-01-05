@@ -63,21 +63,21 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* Main Interface - 2 Panel Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    {/* Few-Shot Panel - Left */}
-                    <div className="lg:col-span-5 animate-float" style={{ animationDelay: '0s' }}>
-                        <div className="floating-panel p-4 md:p-6 h-[600px] md:h-[700px]">
-                            <FewShotPanel onSelectExample={(example) => {
-                                console.log('Selected example:', example);
-                            }} />
+                {/* Main Interface - Single Column Layout */}
+                <div className="max-w-4xl mx-auto space-y-6">
+                    {/* Chat Interface - Top */}
+                    <div className="animate-float" style={{ animationDelay: '0s' }}>
+                        <div className="floating-panel p-4 md:p-6 h-[500px] md:h-[600px]">
+                            <ChatInterface />
                         </div>
                     </div>
 
-                    {/* Chat Interface - Right */}
-                    <div className="lg:col-span-7 animate-float" style={{ animationDelay: '0.1s' }}>
-                        <div className="floating-panel p-4 md:p-6 h-[600px] md:h-[700px]">
-                            <ChatInterface />
+                    {/* Few-Shot Panel - Below Chat */}
+                    <div className="animate-float" style={{ animationDelay: '0.1s' }}>
+                        <div className="floating-panel p-4 md:p-6">
+                            <FewShotPanel onSelectExample={(example) => {
+                                console.log('Selected example:', example);
+                            }} />
                         </div>
                     </div>
                 </div>
